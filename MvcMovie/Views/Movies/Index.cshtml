@@ -1,0 +1,69 @@
+﻿@*동영상 컨트롤러를 만들 때 Visual Studio Index.cshtml 파일의 맨 위에 다음 @model 문을 자동으로 포함했습니다.*@
+@model IEnumerable<MvcMovie.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("Index", "Movies", FormMethod.Get))
+    {
+        <p> 
+            @*매개 변수 "MovieGenre"는 도우미가 .에서 ViewBag찾을 수 있는 IEnumerable<SelectListItem> 키를 DropDownList 제공합니다. ViewBag 작업 메서드에 채워집니다.*@
+            Genre: @Html.DropDownList("movieGenre", "All")
+            Title: @Html.TextBox("SearchString")   
+            <input type="submit" value="Filter" />
+        </p> 
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th></th>
+    </tr>
+    @*@model 지시문을 사용하면 강력한 형식의 개체를 사용하여 Model 컨트롤러가 보기에 전달한 영화 목록에 액세스할 수 있습니다. 예를 들어 Index.cshtml 템플릿에서 코드는 강력한 형식 Model 의 개체에 대해 문을 수행 foreach 하여 영화를 반복합니다.*@
+    @*개체는 Model 강력한 형식(개체) IEnumerable<Movie> 이므로 루프의 각 item 개체는 형식이 지정됩니다.*@
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,52 @@
+﻿@*뷰 템플릿 파일의 맨 위에 문을 포함 @model 하면 뷰에서 예상하는 개체의 형식을 지정할 수 있습니다. 영화 컨트롤러를 만들 때 Visual Studio에서는 Details.cshtml 파일의 맨 위에 다음 @model 문을 자동으로 포함했습니다.*@
+@model MvcMovie.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<!--강력한 형식 Model 의 개체를 사용하여 DisplayNameFor 각 동영상 필드를 및 DisplayFor HTML 도우미에 전달합니다. Create 및 Edit 메서드 및 보기 템플릿도 동영상 모델 개체를 전달합니다.-->
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
